@@ -2,4 +2,4 @@
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+This application allows you to see a detailed view for each individual movie, including all genres associated with that movie.
