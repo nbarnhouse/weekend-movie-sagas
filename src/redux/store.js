@@ -27,7 +27,9 @@ function* fetchAllMovies() {
 function* fetchAllDetails() {
   try {
     // Get the movies:
-    const moviesResponseDetails = yield axios.get('/api/genres');
+    const moviesResponseDetails = yield axios.get(
+      '/api/genres/${action.payload}`'
+    );
     // Set the value of the movies reducer:
     yield put({
       type: 'SET_GENRES',
