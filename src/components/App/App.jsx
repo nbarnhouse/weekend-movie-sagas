@@ -6,14 +6,14 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      {/* <h1>The Movies Saga!</h1> */}
       <Router>
         <Route path="/" exact>
           <MovieList />
         </Route>
 
         {/* Details page */}
-        <Route path="/details" exact>
+        <Route path="/details">
           <MovieDetails />
         </Route>
         {/* Add Movie page */}
