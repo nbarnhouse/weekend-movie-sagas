@@ -30,7 +30,7 @@ export default function MovieDetails() {
       <p>Director: {genres.director}</p> */}
 
       {/* Assuming genres is an array */}
-      {/* <p>Genres: {genres.map((genre) => genre.name).join(', ')}</p> */}
+      <p>Genres: {genres.map((genre) => genre.name).join(', ')}</p>
 
       {/* Return to Movie List button */}
       <button data-testid="toList" onClick={handleReturnToList}>

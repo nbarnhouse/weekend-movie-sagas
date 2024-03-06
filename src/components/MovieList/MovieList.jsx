@@ -30,6 +30,7 @@ function MovieList() {
               key={movie.id}
             >
               <h3>{movie.title}</h3>
+
               <img
                 src={movie.poster}
                 data-testid="toDetails"
