@@ -4,12 +4,31 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
-// Create the rootSaga generator function
-function* rootSaga() {
-  yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-  yield takeEvery('FETCH_GENRES', fetchAllDetails);
-}
+//REDUCERS
+// Used to store movies returned from the server
+const movies = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_MOVIES':
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
+// Used to store the movie genres & all details returned from the server
+const genres = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_GENRES':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+//SAGA
+const sagaMiddleware = createSagaMiddleware();
+
+//GENERATOR FUNCTIONS
 function* fetchAllMovies() {
   try {
     // Get the movies:
@@ -27,40 +46,25 @@ function* fetchAllMovies() {
 function* fetchAllDetails() {
   try {
     // Get the movies:
-    const moviesResponseDetails = yield axios.get('/api/genres`');
+    const moviesResponseDetails = yield axios.get(`/api/genres`);
     // Set the value of the movies reducer:
     yield put({
       type: 'SET_GENRES',
       payload: moviesResponseDetails.data,
     });
   } catch (error) {
-    console.log('fetchAllMovies error:', error);
+    console.log('fetchMovieDetails error:', error);
   }
 }
 
-// Create sagaMiddleware
-const sagaMiddleware = createSagaMiddleware();
+//ROOT SAGA
+// Create the rootSaga generator function
+function* rootSaga() {
+  yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+  yield takeEvery('FETCH_GENRES', fetchAllDetails);
+}
 
-// Used to store movies returned from the server
-const movies = (state = [], action) => {
-  switch (action.type) {
-    case 'SET_MOVIES':
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
-// Used to store the movie genres
-const genres = (state = [], action) => {
-  switch (action.type) {
-    case 'SET_GENRES':
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
+//STORE
 // Create one store that all components can use
 const storeInstance = createStore(
   combineReducers({
