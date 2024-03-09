@@ -6,23 +6,17 @@ export default function MovieDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const movies = useSelector((store) => store.movies);
   const genres = useSelector((store) => store.genres);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GENRES' });
   }, []);
 
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_MOVIES' });
-  // }, []);
-
   const handleReturnToList = () => {
     // Navigate back to the movie list
     history.push('/');
   };
 
-  // const selectedMovie = movies.find((movie) => movie.id === Number(id));
   const selectedGenre = genres.find((genre) => genre.id === Number(id));
 
   console.log('Current Movie ID:', id);
@@ -32,16 +26,7 @@ export default function MovieDetails() {
   return (
     <main>
       <h1>Movie List</h1>
-      {/* <section>
-        {selectedMovie ? (
-          <div key={selectedMovie.id}>
-            <p>{selectedMovie.title}</p>
-            <p>{selectedMovie.description}</p>
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </section> */}
+
       <section data-testid="movieDetails">
         <div>
           {selectedGenre ? (
